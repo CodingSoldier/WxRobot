@@ -1,19 +1,36 @@
 package main
 
 import (
-	"WxRobot/pkg"
-	"fmt"
+	"embed"
+	"github.com/gin-gonic/gin"
+	"html/template"
+	"io/fs"
+	"net/http"
 )
 
-func main() {
-	isSuccess := pkg.RunTask()
-	if isSuccess {
-		fmt.Println("程序启动成功")
-		fmt.Println("不可以关闭本窗口。如果关闭本窗口，程序将停止运行")
-	} else {
-		fmt.Println("程序启动失败")
-	}
+//go:embed static
+var FS embed.FS
 
-	// 阻塞
-	select {}
+func main() {
+	router := gin.Default()
+
+	html := template.Must(template.New("").ParseFS(FS, "static/*.html"))
+	router.SetHTMLTemplate(html)
+
+	fsSub, _ := fs.Sub(FS, "static")
+	router.StaticFS("/static", http.FS(fsSub))
+
+	router.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.html", gin.H{})
+	})
+
+	router.GET("/test", func(c *gin.Context) {
+		firstName := c.Query("firstName")
+		lastName := c.DefaultQuery("lastName", "默认值")
+
+		c.String(http.StatusOK, "%s%s", firstName, lastName)
+	})
+
+	router.Run(":8080")
+
 }
