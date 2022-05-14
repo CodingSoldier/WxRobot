@@ -1,10 +1,10 @@
 # 企业微信机器人的webhook
 webhook-url: https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=10c91e84-b21b-446e-bec4-3d573b12906e
 
-# cron格式的时间，需要用单引号括住
-# '0 0 19 ? * MON-FRI' 表示 0秒 0分 19时 不规定哪一天 每个月 周一到周五
+# cron格式的时间
+# 0 0 19 ? * MON-FRI 表示 0秒 0分 19时 不规定哪一天 每个月 周一到周五
 # Cron表达式生成器 https://www.bejson.com/othertools/cron/
-cron-time: '0/10 * * * * ?'
+cron-time: 0/10 * * * * ?
 
 # 消息头
 message-title: 今日觅食密码
