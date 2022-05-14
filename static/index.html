@@ -2,9 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>定时发送企业微信消息</title>
 </head>
 <body>
-首页
+<h1>定时发送企业微信消息</h1>
+
+<h4>企业微信机器人的webhook</h4>
+<input id="webhookUrl" type="text" name="webhookUrl">
+
+<h4>消息头</h4>
+<input id="messageTitle" type="text" name="messageTitle">
+
+<h4>消息头颜色。3种内置颜色，info 绿色，comment 灰色，warning 橙红色</h4>
+<input id="messageTitleColor" type="text" name="messageTitleColor">
+
+<h4>消息主体。最终发送的信息是 message-content + message-password</h4>
+<input id="messageContent" type="text" name="messageContent">
+
+<h4>消息密码</h4>
+<input id="messagePassword" type="text" name="messagePassword">
+
+<h4>cron格式的时间</h4>
+<p>0 0 19 ? * MON-FRI 表示 0秒 0分 19时 不规定哪一天 每个月 周一到周五</p>
+<p>Cron表达式生成器 https://www.bejson.com/othertools/cron/</p>
+<input id="cronTime" type="text" name="cronTime">
+
+<br/>
+<br/>
+<button id="submit">提交</button>
+
+<script src="./static/js/jquery-3.3.1.min.js"></script>
+<script>
+    $.get("")
+</script>
 </body>
 </html>

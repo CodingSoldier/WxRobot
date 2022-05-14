@@ -1,0 +1,6 @@
+webhook-url: https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=10c91e84-b21b-446e-bec4-3d573b12906e
+message-title: 今日觅食密码
+message-title-color: warning
+message-password: dfadfaf
+message-content: ""
+cron-time: 0 0 19 ? * MON-FRI
