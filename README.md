@@ -9,6 +9,8 @@ go build
 
 ## 使用
 1、将 WxRobot.exe、config.yaml 放在同一个目录中
-2、修改 config.yaml 
-3、双击 WxRobot.exe 
+
+2、修改 config.yaml
+
+3、双击 WxRobot.exe
 
