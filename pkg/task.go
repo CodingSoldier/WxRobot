@@ -16,11 +16,11 @@ func RunTask() bool {
 	task := cron.New(cron.WithSeconds())
 	_, err := task.AddFunc(conf.CronTime, func() {
 		msg := conf.MessageContent + conf.MessagePassword
-		fmt.Println(time.Now(), "发送企业微信消息，内容是：", msg)
+		fmt.Println(time.Now(), "发送企业微信消息，内容是 ", msg)
 		WxSend(conf)
 	})
 	if err != nil {
-		fmt.Println("创建定时任务出错了，错误信息 ", err.Error())
+		fmt.Println("创建定时任务出错了，错误信息是 ", err.Error())
 		task.Start()
 		return false
 	}
