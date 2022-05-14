@@ -1,0 +1,21 @@
+# 企业微信机器人的webhook
+webhook-url: https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=10c91e84-b21b-446e-bec4-3d573b12906e
+
+# cron格式的时间，需要用单引号括住
+# '0 0 19 ? * MON-FRI' 表示 0秒 0分 19时 不规定哪一天 每个月 周一到周五
+# Cron表达式生成器 https://www.bejson.com/othertools/cron/
+cron-time: '0 0 19 ? * MON-FRI'
+
+# 消息头
+message-title: 今日觅食密码
+
+# 消息头颜色。3种内置颜色，info 绿色，comment 灰色，warning 橙红色
+message-title-color: warning
+
+# 消息主体
+# 不知道写什么，暂时留空
+# 最终发送的信息是 message-content + message-password
+message-content:
+
+# 消息密码
+message-password: 123
