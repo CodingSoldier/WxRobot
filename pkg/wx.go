@@ -4,7 +4,9 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
+	"time"
 )
 
 // 发送企业微信消息
@@ -17,5 +19,20 @@ func WxSend(config *Config) {
 		"content": content,
 	}
 	b, _ := json.Marshal(body)
-	http.DefaultClient.Post(config.WebhookUrl, "application/json", bytes.NewBuffer(b))
+	resp, err := http.DefaultClient.Post(config.WebhookUrl, "application/json", bytes.NewBuffer(b))
+	if err != nil {
+		fmt.Println("发送企业微信消息出错 ", err.Error())
+	}
+	defer resp.Body.Close()
+	bodyC, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Println("读取企业微信返回结果出错 ", err.Error())
+	}
+	var jsonMap map[string]interface{}
+	err = json.Unmarshal(bodyC, &jsonMap)
+	if err != nil {
+		fmt.Println("反序列化企业微信返回结果出错 ", err.Error())
+		return
+	}
+	fmt.Println(time.Now(), "发送企业微信消息成功，企业微信返回报文是 ", jsonMap)
 }
