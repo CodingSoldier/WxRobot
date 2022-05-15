@@ -6,6 +6,8 @@ import (
 	"time"
 )
 
+var WxTask = &Task{}
+
 type Task struct {
 	Cron    *cron.Cron
 	EntryID cron.EntryID

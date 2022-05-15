@@ -10,7 +10,7 @@ import (
 )
 
 // 发送企业微信消息
-func WxSend(config *Config) {
+func WxSend(config *Config) error {
 	body := make(map[string]interface{})
 	body["msgtype"] = "markdown"
 	var content = fmt.Sprintf("# <font color=\"%s\">%s</font> \n %s%s",
@@ -22,17 +22,20 @@ func WxSend(config *Config) {
 	resp, err := http.DefaultClient.Post(config.WebhookUrl, "application/json", bytes.NewBuffer(b))
 	if err != nil {
 		fmt.Println("发送企业微信消息出错 ", err.Error())
+		return err
 	}
 	defer resp.Body.Close()
 	bodyC, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Println("读取企业微信返回结果出错 ", err.Error())
+		return err
 	}
 	var jsonMap map[string]interface{}
 	err = json.Unmarshal(bodyC, &jsonMap)
 	if err != nil {
 		fmt.Println("反序列化企业微信返回结果出错 ", err.Error())
-		return
+		return err
 	}
 	fmt.Println(time.Now(), "发送企业微信消息成功，企业微信返回报文是 ", jsonMap)
+	return nil
 }

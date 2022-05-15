@@ -3,37 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <title>定时发送企业微信消息</title>
+
+    <script src="./static/js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 <h1>定时发送企业微信消息</h1>
 
 <h4>企业微信机器人的webhook</h4>
-<input id="webhookUrl" type="text" name="webhookUrl">
+<input id="WebhookUrl" type="text" name="WebhookUrl">
 
 <h4>消息头</h4>
-<input id="messageTitle" type="text" name="messageTitle">
+<input id="MessageTitle" type="text" name="MessageTitle">
 
 <h4>消息头颜色。3种内置颜色，info 绿色，comment 灰色，warning 橙红色</h4>
-<input id="messageTitleColor" type="text" name="messageTitleColor">
+<input id="MessageTitleColor" type="text" name="MessageTitleColor">
 
 <h4>消息主体。最终发送的信息是 message-content + message-password</h4>
-<input id="messageContent" type="text" name="messageContent">
+<input id="MessageContent" type="text" name="MessageContent">
 
 <h4>消息密码</h4>
-<input id="messagePassword" type="text" name="messagePassword">
+<input id="MessagePassword" type="text" name="MessagePassword">
 
 <h4>cron格式的时间</h4>
 <p>0 0 19 ? * MON-FRI 表示 0秒 0分 19时 不规定哪一天 每个月 周一到周五</p>
 <p>Cron表达式生成器 https://www.bejson.com/othertools/cron/</p>
-<input id="cronTime" type="text" name="cronTime">
+<input id="CronTime" type="text" name="CronTime">
 
 <br/>
 <br/>
 <button id="submit">提交</button>
 
-<script src="./static/js/jquery-3.3.1.min.js"></script>
 <script>
-    $.get("")
+    $.get("http://localhost:10010/api/config/detail", function(resp){
+        console.log("########")
+        console.log(resp)
+        if (resp.code != 0) {
+            alert("获取配置失败。"+resp.message);
+        }
+        let data = resp.data
+        $("#WebhookUrl").val(data.WebhookUrl)
+        $("#MessageTitle").val(data.MessageTitle)
+        $("#MessageTitleColor").val(data.MessageTitleColor)
+        $("#MessageContent").val(data.MessageContent)
+        $("#MessagePassword").val(data.MessagePassword)
+        $("#CronTime").val(data.CronTime)
+    });
+
+    $("#submit").click(function() {
+        $.post("http://localhost:10010/api/config/save", {
+            WebhookUrl: $("#WebhookUrl").val().trim(),
+            MessageTitle: $("#MessageTitle").val().trim(),
+            MessageTitleColor: $("#MessageTitleColor").val().trim(),
+            MessageContent: $("#MessageContent").val().trim(),
+            MessagePassword: $("#MessagePassword").val().trim(),
+            CronTime: $("#CronTime").val().trim()
+        }, function (resp) {
+            if (resp.code == 0) {
+                alert("保存成功")
+            } else if (resp.code != 0) {
+                alert("保存失败。"+resp.message);
+            }
+        })
+   })
+
 </script>
 </body>
 </html>
