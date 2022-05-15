@@ -1,3 +1,6 @@
+# 配置文件，以键值对方式填写。冒号前面是键，不可以修改；冒号后面空一格后是值，值可以修改。
+# 注意：要在冒号后面空一格再填写值
+
 # 企业微信机器人的webhook
 webhook-url: https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=10c91e84-b21b-446e-bec4-3d573b12906e
 
