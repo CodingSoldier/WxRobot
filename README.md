@@ -14,3 +14,5 @@ go build
 
 3、双击 WxRobot.exe
 
+4、打开 http://localhost:10010/
+

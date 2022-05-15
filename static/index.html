@@ -59,7 +59,7 @@
             CronTime: $("#CronTime").val().trim()
         }, function (resp) {
             if (resp.code == 0) {
-                alert("保存成功")
+                alert("保存成功，请查看后台日志是否有报错信息。")
             } else if (resp.code != 0) {
                 alert("保存失败。"+resp.message);
             }

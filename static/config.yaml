@@ -1,6 +1,6 @@
 webhook-url: https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=10c91e84-b21b-446e-bec4-3d573b12906e
-message-title: 消息头
-message-title-color: 'warning '
-message-password: 消息密码
-message-content: 消息主体
-cron-time: 0 0/2 * * * ?
+message-title: 消息头111
+message-title-color: warning
+message-password: 消息密码111
+message-content: 消息主体111
+cron-time: 0/10 * * * * ?
